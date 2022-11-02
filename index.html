@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TO DO</title>
+    <style>
+        body{
+            margin: 30px 25px;
+            font-family: sans-serif;
+        }.container{
+            display: flex;
+            gap: 70px;
+        }#posts div{
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }#posts{
+            width: 500px;
+        }#posts div button{
+            cursor: pointer;
+        }#msg{
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <h1>Social Media App</h1>
+    <div class="container">
+        <div class="left">
+            <form id="frm">
+                <label for="">Write your post here</label><br><br>
+                <textarea name="" id="inputt" cols="30" rows="10"></textarea><br><br>
+                <div id="msg"></div>
+                <button type="submit" id="submit_btn">submit</button>
+            </form>
+        </div>
+        <div class="right">
+            <h3>Your posts here</h3>
+            <div id="posts">
+                <div>
+                    <p>post 1</p>
+                    <span id="options">
+                        <button id="ed">EDIT</button>
+                        <button id="dl">DELETE</button>
+                    </span>
+                </div>
+                <div>
+                    <p>post 1</p>
+                    <span id="options">
+                        <button id="ed">EDIT</button>
+                        <button id="dl">DELETE</button>
+                    </span>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</body>
+
+
+<script>
+    let inputt = document.getElementById("inputt")
+    let msg = document.getElementById("msg")
+    let formm = document.getElementById("frm");
+    let posts = document.getElementById("posts");
+    formm.addEventListener("submit",(v)=>{
+        v.preventDefault();
+        formvalidation();
+        inputt.value = "";
+    })
+
+    function formvalidation(){
+        if(inputt.value === ""){
+            msg.innerHTML = "post can not be blank!";
+        }else if(inputt.value === " "){
+            msg.innerHTML = "It contains only white spaces";
+        }
+        else{
+            msg.innerHTML = "";
+            collect_data();
+        }
+    }
+
+    let data = {};
+
+    function collect_data(){
+        data["text"] = inputt.value;
+        console.log(data);
+        display_data();
+    }
+
+    function display_data(){
+        posts.innerHTML += `<div>
+                    <p>${data.text}</p>
+                    <span id="options">
+                        <button id="ed" onClick="edit_post(this)">EDIT</button>
+                        <button id="dl" onClick="delete_post(this)">DELETE</button>
+                    </span>
+                </div>`;
+    }
+
+    function delete_post(e){
+        e.parentElement.parentElement.remove();
+    }
+
+    function edit_post(e){
+        inputt.value = e.parentElement.previousElementSibling.innerHTML;
+        e.parentElement.parentElement.remove();
+    }
+</script>
+</html>
