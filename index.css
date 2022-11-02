@@ -1,0 +1,17 @@
+body{
+    margin: 30px 25px;
+    font-family: sans-serif;
+}.container{
+    display: flex;
+    gap: 70px;
+}#posts div{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}#posts{
+    width: 500px;
+}#posts div button{
+    cursor: pointer;
+}#msg{
+    color: red;
+}
